@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width.initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
     <title>Your First Web Page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -16,16 +16,32 @@
             <h1>Welcome to Website to Do List. </h1>
             <input type="text" placeholder="Write hear..." id="inputBox">
             <ul id="list"></ul>
-            <button id="discount-button">click ok to next step</button>
-            <p id="message"></p>
-            <script src='index.js'></script>
-            <p>This is your first web page.</p>
-
 
         </div>
-
     </div>
+    <script>
+        let inputBox = document.querySelector('#inputBox');
+        let list = document.querySelector('#list');
 
+        inputBox.addEventListener("keyup", function (event) {
+            if (event.key == "Enter") {
+                addItem(this.value)
+                this.value = ""
+            }
+        })
+        let addItem = (inputBox) => {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `${inputBox}<i></i>`;
+            listItem.addEventListener("click", function () {
+                this.classList.toggle('done');
+            })
+            listItem.querySelector("i").addEventListener("click",
+                function () {
+                    listItem.remove();
+                })
+            list.appendChild(listItem);
+        }
+    </script>
 
 </body>
 
